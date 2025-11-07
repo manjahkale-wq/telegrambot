@@ -5,37 +5,32 @@ import os
 
 # Load token dan channel dari .env
 load_dotenv()
-TOKEN = os.getenv("8308738802:AAGYMvFv8ofJg4a3_ATG89LEkd_QhKLkyrQ")
-CHANNEL_ID = os.getenv("@dramacinasubindooo")
+TOKEN = os.getenv("TOKEN")
+CHANNEL_ID = os.getenv("CHANNEL_ID")
 
 bot = telebot.TeleBot(TOKEN)
 
-# Command /start
 @bot.message_handler(commands=['start'])
 def start(message):
-    bot.reply_to(message,
-                 "👋 Hai! Gunakan perintah:\n\n"
-                 "/kirim <pesan>\n\n"
-                 "untuk mengirim pesan ke channel dengan tombol link alternatif.")
+    bot.reply_to(
+        message,
+        "👋 Hai! Gunakan perintah:\n\n"
+        "/kirim <pesan>\n\n"
+        "untuk mengirim pesan ke channel dengan tombol link alternatif."
+    )
 
-# Command /kirim
 @bot.message_handler(commands=['kirim'])
 def kirim_pesan(message):
     try:
-        # Ambil teks setelah perintah /kirim
         teks = message.text.split(" ", 1)[1]
-
-        # Buat tombol link
         markup = InlineKeyboardMarkup()
         markup.add(
             InlineKeyboardButton("🔗 Link Alternatif 1", url="https://t.me/ClaimEventPajaktoto"),
             InlineKeyboardButton("🔗 Link Alternatif 2", url="https://t.me/fauzanmahjong")
         )
 
-        # Kirim ke channel
-        bot.send_message(CHANNEL_ID, teks, reply_markup=markup)
+        bot.send_message(CHANNEL_ID, teks, reply_markup=markup, parse_mode="HTML")
         bot.reply_to(message, "✅ Pesan dengan tombol berhasil dikirim ke channel.")
-
         print(f"Pesan dikirim: {teks}")
 
     except IndexError:
@@ -45,4 +40,3 @@ def kirim_pesan(message):
 
 print("🚀 Bot Telegram siap mengirim ke channel...")
 bot.infinity_polling()
-
