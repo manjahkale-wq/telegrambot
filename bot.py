@@ -5,8 +5,8 @@ import os
 
 # Load token dan channel dari .env
 load_dotenv()
-TOKEN = os.getenv("BOT_TOKEN")
-CHANNEL_ID = os.getenv("CHANNEL_ID")
+TOKEN = os.getenv("8308738802:AAGYMvFv8ofJg4a3_ATG89LEkd_QhKLkyrQ")
+CHANNEL_ID = os.getenv("@dramacinasubindooo")
 
 bot = telebot.TeleBot(TOKEN)
 
@@ -45,3 +45,4 @@ def kirim_pesan(message):
 
 print("🚀 Bot Telegram siap mengirim ke channel...")
 bot.infinity_polling()
+
